@@ -5,15 +5,6 @@
 #include <sqlite3.h>
 
 
-struct Monster {
-	char name[50];
-	int armour;
-	int attack;
-	int magic;
-	int defense;
-};
-
-
 struct Character {
 	char name[50];
 	char race[50];
