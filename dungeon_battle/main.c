@@ -21,25 +21,6 @@ int newlevel()
 
 
 
-int deriveAttackPower()
-{
-	time_t t;
-	srand((unsigned) time(&t));
-	int attack = rand() % 7;
-	
-	return attack;
-}
-
-
-int deriveDefensePower()
-{
-	time_t t;
-	srand((unsigned) time(&t));
-	int armour = rand() % 7;
-	
-	return armour;
-}
-
 //this function used for the sqlite calls, TBH have no idea what it does
 static int callback(void *Notused, int argc, char **argv, char **azColName)
 	{
