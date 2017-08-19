@@ -1,9 +1,9 @@
 struct Character {
-	char name[50];
-	char race[50];
-	char class[50];
-	char owner[50];
-	char weapon[50];
+	char name[20];
+	char race[6];
+	char class[8];
+	char owner[20];
+	char weapon[20];
 	int armour;
 	int attack;
 	int magic;
@@ -12,9 +12,31 @@ struct Character {
 
 
 
+int deriveAttackPower()
+{
+	time_t t;
+	srand((unsigned) time(&t));
+	int attack = rand() % 7;
+	
+	return attack;
+}
+
+
+int deriveDefensePower()
+{
+	time_t t;
+	srand((unsigned) time(&t));
+	int armour = rand() % 7;
+	
+	return armour;
+}
+
 int newchar()
 {
 struct Character *myChar = malloc(sizeof(Character));
+
+
+printf("Size of the struct we malloc'd: %d\n", sizeof(Character));
 
 if(!myChar) {
 	return 1;
@@ -34,11 +56,10 @@ printf("tmp %d\n", tmp);
 
 if(tmp == 1)
 {
-	//*myChar->race = "Orc";
-	char orc[5] = "Orc";
+	*myChar->race = "Orc\0";
 
-	strcpy(*myChar->race, orc);
-	printf("Race: %s\n", orc);
+	//strcpy(*myChar->race, "Orc");
+	printf("Race: %s\n", myChar->race);
 } 
 /*
 switch(tmp) {
