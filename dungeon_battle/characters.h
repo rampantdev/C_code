@@ -27,7 +27,6 @@ int deriveDefensePower()
 	time_t t;
 	srand((unsigned) time(&t));
 	int armour = rand() % 7;
-	printf("Armour value: %d", armour);
 	return armour;
 }
 
@@ -64,23 +63,18 @@ printf("tmp %d\n", tmp);
 
 switch(tmp) {
 	case 1:
-		//*myChar->race = "Orc";
 		myChar->armour += 2;
 		strncpy(myChar->race, "Orc\0", 6);
 
 	case 2:
-		//*myChar->race = "Elf";
 		myChar->magic +=2;
 		strncpy(myChar->race, "Elf\0", 6);
 
 	case 3:
-		//*myChar->race = "Human";
 		strncpy(myChar->race, "Human\0", 6);
 	case 4:
-		//*myChar->race = "Gnome";
 		strncpy(myChar->race, "Gnome\0", 6);
 	case 5:
-		//*myChar->race = "Dwarf";
 		strncpy(myChar->race, "Dwarf\0", 6);
 }
 
@@ -97,25 +91,20 @@ scanf("%d", &tmp_class);
 
 switch(tmp_class) {
 	case 1:
-		//*myChar->race = "Wizard\0";
 		strncpy(myChar->class, "Wizard\0", 8);
 		myChar->magic +=2;
 	case 2:
-		//*myChar->race = "Priest\0";
 		strncpy(myChar->class, "Priest\0", 8);
 
 		myChar->magic +=2;
 	case 3:
-		//*myChar->race = "Warrior\0";
 		strncpy(myChar->class, "Warrior\0", 8);
 		myChar->armour +=2;
 	case 4:
-		//*myChar->race = "Archer\0";
 		myChar->attack +=2;
 		strncpy(myChar->class, "Archer\0", 8);
 
 	case 5:
-		//*myChar->race = "Rogue\0";
 		myChar->attack +=2;
 		strncpy(myChar->class, "Rogue\0", 8);
 }
@@ -133,7 +122,6 @@ scanf("%s", myChar->weapon);
 
 
 printf("New Character Created: \n");
-//printf(*myChar->name);
 
 return myChar;
 }
