@@ -7,8 +7,7 @@ struct Character {
 	int armour;
 	int attack;
 	int magic;
-	int defense;
-
+	
 } Character;
 
 
@@ -101,7 +100,7 @@ myChar->attack += deriveAttackPower();
 printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
 
 myChar->armour += deriveDefensePower();
-printf("The Random Number Generator determined your defense is: %d\n", myChar->attack);
+printf("The Random Number Generator determined your defense is: %d\n", myChar->armour);
 
 printf("New Character Created: \n");
 //printf(*myChar->name);

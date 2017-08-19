@@ -87,8 +87,7 @@ int main()
          "WEAPON        CHAR(50)," \
          "ARMOUR        INT(50)," \
          "ATTACK        INT(50)," \
-         "MAGIC        INT(50)," \
-         "DEFENSE         INT(50) );");
+         "MAGIC        INT(50);");
 
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
@@ -101,10 +100,10 @@ int main()
 		//isn't this built into sql?
 	
 	/*
-	snprintf(sql, 1000, "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC, DEFENSE) "  \
+	snprintf(sql, 1000, "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
           "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
-          currentCharacter->attack, currentCharacter->magic, currentCharacter->defense);
+          currentCharacter->attack, currentCharacter->magic);
 	*/
 
 	printf("Name %s\n", currentCharacter->name);
@@ -115,20 +114,19 @@ int main()
 	printf("Armour: %s\n", currentCharacter->armour);
 	printf("Attack: %s\n", currentCharacter->attack);
 	printf("Magic: %s\n", currentCharacter->magic);
-	printf("Defense: %s\n", currentCharacter->defense);
-
+	
 /*
-		"INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC, DEFENSE) "  \
+		"INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
           "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
-          currentCharacter->attack, currentCharacter->magic, currentCharacter->defense);
+          currentCharacter->attack, currentCharacter->magic);
 */
 
 	/*
-	sql = ("INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC, DEFENSE) "  \
+	sql = ("INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
           "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", *currentCharacter->name, *currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
-          currentCharacter->attack, currentCharacter->magic, currentCharacter->defense);
+          currentCharacter->attack, currentCharacter->magic);
 	*/
 
 	//printf("SQL INSERT data: %s\n", sql);
