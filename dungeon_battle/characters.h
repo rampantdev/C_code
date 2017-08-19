@@ -27,7 +27,7 @@ int deriveDefensePower()
 	time_t t;
 	srand((unsigned) time(&t));
 	int armour = rand() % 7;
-	
+	printf("Armour value: %d", armour);
 	return armour;
 }
 
@@ -41,6 +41,14 @@ printf("Size of the struct we malloc'd: %d\n", sizeof(Character));
 if(!myChar) {
 	return 1;
 }
+
+
+myChar->attack += deriveAttackPower();
+printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
+
+myChar->armour += deriveDefensePower();
+printf("The Random Number Generator determined your defense is: %d\n", myChar->armour);
+
 
 printf("Which race is your character?\n");
 printf("1 - Orc\n");
@@ -123,11 +131,6 @@ printf("What weapon are you using?\n");
 scanf("%s", myChar->weapon);
 
 
-myChar->attack += deriveAttackPower();
-printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
-
-myChar->armour += deriveDefensePower();
-printf("The Random Number Generator determined your defense is: %d\n", myChar->armour);
 
 printf("New Character Created: \n");
 //printf(*myChar->name);
