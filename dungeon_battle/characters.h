@@ -90,19 +90,19 @@ scanf("%d", &tmp_class);
 
 switch(tmp_class) {
 	case 1:
-		*myChar->race = "Wizard";
+		*myChar->race = "Wizard\0";
 		myChar->magic +=2;
 	case 2:
-		*myChar->race = "Priest";
+		*myChar->race = "Priest\0";
 		myChar->magic +=2;
 	case 3:
-		*myChar->race = "Warrior";
+		*myChar->race = "Warrior\0";
 		myChar->armour +=2;
 	case 4:
-		*myChar->race = "Archer";
+		*myChar->race = "Archer\0";
 		myChar->attack +=2;
 	case 5:
-		*myChar->race = "Rogue";
+		*myChar->race = "Rogue\0";
 		myChar->attack +=2;
 }
 
