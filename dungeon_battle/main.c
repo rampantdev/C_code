@@ -92,9 +92,9 @@ int main()
 	printf("Class: %s\n", currentCharacter->class);
 	printf("Owner: %s\n", currentCharacter->owner);
 	printf("Weapon: %s\n", currentCharacter->weapon);
-	printf("Armour: %s\n", currentCharacter->armour);
-	printf("Attack: %s\n", currentCharacter->attack);
-	printf("Magic: %s\n", currentCharacter->magic);
+	//printf("Armour: %s\n", currentCharacter->armour);
+	//printf("Attack: %s\n", currentCharacter->attack);
+	//printf("Magic: %s\n", currentCharacter->magic);
 	
 /*
 		"INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \

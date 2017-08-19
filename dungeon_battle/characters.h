@@ -54,29 +54,28 @@ int tmp;
 scanf("%d", &tmp);
 printf("tmp %d\n", tmp);
 
-if(tmp == 1)
-{
-	*myChar->race = "Orc\0";
-
-	//strcpy(*myChar->race, "Orc");
-	printf("Race: %s\n", myChar->race);
-} 
-/*
 switch(tmp) {
 	case 1:
-		*myChar->race = "Orc";
+		//*myChar->race = "Orc";
 		myChar->armour += 2;
+		strncpy(myChar->race, "Orc\0", 6);
+
 	case 2:
-		*myChar->race = "Elf";
+		//*myChar->race = "Elf";
 		myChar->magic +=2;
+		strncpy(myChar->race, "Elf\0", 6);
+
 	case 3:
-		*myChar->race = "Human";
+		//*myChar->race = "Human";
+		strncpy(myChar->race, "Human\0", 6);
 	case 4:
-		*myChar->race = "Gnome";
+		//*myChar->race = "Gnome";
+		strncpy(myChar->race, "Gnome\0", 6);
 	case 5:
-		*myChar->race = "Dwarf";
+		//*myChar->race = "Dwarf";
+		strncpy(myChar->race, "Dwarf\0", 6);
 }
-*/
+
 	
 printf("Which class is your character?\n");
 printf("1 - Wizard\n");
@@ -90,20 +89,27 @@ scanf("%d", &tmp_class);
 
 switch(tmp_class) {
 	case 1:
-		*myChar->race = "Wizard\0";
+		//*myChar->race = "Wizard\0";
+		strncpy(myChar->class, "Wizard\0", 8);
 		myChar->magic +=2;
 	case 2:
-		*myChar->race = "Priest\0";
+		//*myChar->race = "Priest\0";
+		strncpy(myChar->class, "Priest\0", 8);
+
 		myChar->magic +=2;
 	case 3:
-		*myChar->race = "Warrior\0";
+		//*myChar->race = "Warrior\0";
+		strncpy(myChar->class, "Warrior\0", 8);
 		myChar->armour +=2;
 	case 4:
-		*myChar->race = "Archer\0";
+		//*myChar->race = "Archer\0";
 		myChar->attack +=2;
+		strncpy(myChar->class, "Archer\0", 8);
+
 	case 5:
-		*myChar->race = "Rogue\0";
+		//*myChar->race = "Rogue\0";
 		myChar->attack +=2;
+		strncpy(myChar->class, "Rogue\0", 8);
 }
 
 printf("Enter the name of your char\n");
