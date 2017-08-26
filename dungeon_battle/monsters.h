@@ -24,24 +24,36 @@ char* monsterTypes()
 		case 1:
 			//*type = "Dragon\0";
 			strncpy(type, "Dragon\0", 15);
+			break;
 		case 2:
 			strncpy(type, "Bear\0", 15);
+			break;
 		case 3:
 			strncpy(type, "Zombie\0", 15);
+			break;
 		case 4:
 			strncpy(type, "Dark Wizard\0", 15);
+			break;
 		case 5:
 			strncpy(type, "Ent\0", 15);
+			break;
 		case 6:
 			strncpy(type, "Giant\0", 15);
+			break;
 		case 7:
 			strncpy(type, "Troll\0", 15);
+			break;
 		case 8:
 			strncpy(type, "Ghost\0", 15);
+			break;
 		case 9:
 			strncpy(type, "Werewolf\0", 15);
+			break;
 		case 10:
 			strncpy(type, "Vampire\0", 15);
+			break;
+		default:
+			printf("ERROR MONSTER TYPE FAIL\n");
 	}
 
 	printf("Dice Roll for type-gen: %d\n", roll);
@@ -74,7 +86,7 @@ int newMonster()
 	this block of code doesn't work. I don't know why it doesn't give us a location value. 
 	Note that locations.h doesn't return a value.. however when we pass location() directly into strcat it works fine
 	I don't know why this is -> investigate as time allows
-	
+
 	*tmp = location();
 	printf("Location: %s\n", tmp);
 
