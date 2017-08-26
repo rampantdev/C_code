@@ -19,8 +19,6 @@ int newlevel()
 }
 
 
-
-
 //this function used for the sqlite calls, TBH have no idea what it does
 static int callback(void *Notused, int argc, char **argv, char **azColName)
 	{
@@ -47,7 +45,7 @@ int main()
 		sqlite3 *db;
 		char *zErrMsg = 0;
 		int rc;
-		char *sql;
+		char *sql[1000];
 		
 		rc = sqlite3_open("dungeons.db", &db);
 
@@ -59,7 +57,7 @@ int main()
 		}
 
 	
-		sql = ("CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
+		*sql = ("CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "RACE            CHAR(50)    NOT NULL," \
@@ -96,21 +94,21 @@ int main()
 	printf("Attack: %d\n", currentCharacter->attack);
 	printf("Magic: %d\n", currentCharacter->magic);
 	
-/*
-		"INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
-          "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
+
+
+	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) \0";
+	char sql_tmp2[500];	 
+
+	
+	sprintf(sql_tmp2, "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
           currentCharacter->attack, currentCharacter->magic);
-*/
 
-	/*
-	sql = ("INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
-          "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", *currentCharacter->name, *currentCharacter->race,
-          currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
-          currentCharacter->attack, currentCharacter->magic);
-	*/
+	strcpy(sql, sql_tmp);
+	strcat(sql, sql_tmp2);
 
-	//printf("SQL INSERT data: %s\n", sql);
+
+	printf("SQL INSERT data: %s\n", sql);
 	
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -122,21 +120,17 @@ int main()
 	{	
 
 		//retrieve sqlite record 
-		sql = "SELECT FROM CHARACTERS (ID,NAME,RACE,CLASS,OWNER) "  \
+		*sql = "SELECT FROM CHARACTERS (ID,NAME,RACE,CLASS,OWNER) "  \
           "VALUES (1, '%s', '%s', '%s', '%s');";
 
 	}
 	//else need to pull their character data from sqlite
 
-	printf("Welcome to %s's Realm", currentCharacter->name);
+	int noink = newMonster();
+
+	printf("Welcome to %s's Realm\n", currentCharacter->name);
 
 	return 0;
 }
 
 
-
-/*
-
-
-
-*/
