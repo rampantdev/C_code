@@ -108,11 +108,9 @@ int main()
 	strcat(sql, sql_tmp2);
 
 
-	printf("SQL INSERT data: %s\n", sql);
-	
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
-	printf("Did the character insert work?: %d\n", rc);	
+//	printf("Did the character insert work?: %d\n", rc);	
 	
 	}
 	

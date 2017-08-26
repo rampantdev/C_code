@@ -17,7 +17,7 @@ char* monsterTypes()
 	time_t t;
 	srand((unsigned) time(&t));
 	int roll = rand() % 11;
-	char type[15];
+	char* type = malloc(15);
 
 	switch(roll)
 	{
@@ -59,16 +59,33 @@ int newMonster()
 		printf("New Monster allocation has failed\n");
 	}	
 
+	char *type = monsterTypes();
+
+	//*newMonster->type = tmp;
+	printf("TYPE: %s\n", type);
 	
-	*newMonster->type = monsterTypes();
-	printf("%s", newMonster->type);
+	
+	strcpy(newMonster->type, type);
+	printf("Monster type: %s\n", newMonster->type);
 	
 	char tmp[50];
-	sprintf(tmp, "%s of %s", *newMonster->type, location());
+	
+/*
+	this block of code doesn't work. I don't know why it doesn't give us a location value. 
+	Note that locations.h doesn't return a value.. however when we pass location() directly into strcat it works fine
+	I don't know why this is -> investigate as time allows
+	
+	*tmp = location();
+	printf("Location: %s\n", tmp);
 
+*/
+	strcpy(newMonster->name, type);
+	
+	strcat(newMonster->name, " of ");
+	strcat(newMonster->name, location());
 
-	*newMonster->name = tmp;
-	printf("Monster name: %s\n", tmp);
+	//*newMonster->name = tmp;
+	printf("Monster name: %s\n", newMonster->name);
 	//*newMonster->name = ("%s of %s", type, location()); 
 
 }
