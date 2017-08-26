@@ -100,7 +100,7 @@ int main()
 	char sql_tmp2[500];	 
 
 	
-	sprintf(sql_tmp2, "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
+	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
           currentCharacter->attack, currentCharacter->magic);
 
