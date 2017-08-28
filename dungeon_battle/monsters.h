@@ -16,7 +16,7 @@ char* monsterTypes()
 
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 11;
+	int roll = rand() % 10;
 	char* type = malloc(15);
 
 	switch(roll)

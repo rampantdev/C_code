@@ -64,7 +64,7 @@ int main()
          "CLASS        CHAR(50)," \
          "OWNER        CHAR(50)," \
          "WEAPON        CHAR(50)," \
-         "ARMOUR        INT(50)," \
+         "HP        INT(50)," \
          "ATTACK        INT(50)," \
          "MAGIC        INT(50);");
 
@@ -90,18 +90,18 @@ int main()
 	printf("Class: %s\n", currentCharacter->class);
 	printf("Owner: %s\n", currentCharacter->owner);
 	printf("Weapon: %s\n", currentCharacter->weapon);
-	printf("Armour: %d\n", currentCharacter->armour);
+	printf("HP: %d\n", currentCharacter->hp);
 	printf("Attack: %d\n", currentCharacter->attack);
 	printf("Magic: %d\n", currentCharacter->magic);
 	
 
 
-	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) \0";
+	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, HP, ATTACK, MAGIC) \0";
 	char sql_tmp2[500];	 
 
 	
 	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
-          currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
+          currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
           currentCharacter->attack, currentCharacter->magic);
 
 	strcpy(sql, sql_tmp);

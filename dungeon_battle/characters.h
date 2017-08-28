@@ -4,7 +4,7 @@ struct Character {
 	char class[8];
 	char owner[20];
 	char weapon[20];
-	int armour;
+	int hp;
 	int attack;
 	int magic;
 	
@@ -26,8 +26,8 @@ int deriveDefensePower()
 {
 	time_t t;
 	srand((unsigned) time(&t));
-	int armour = rand() % 7;
-	return armour;
+	int hp = rand() % 7;
+	return hp;
 }
 
 int newchar()
@@ -45,8 +45,8 @@ if(!myChar) {
 myChar->attack += deriveAttackPower();
 printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
 
-myChar->armour += deriveDefensePower();
-printf("The Random Number Generator determined your defense is: %d\n", myChar->armour);
+myChar->hp += deriveDefensePower();
+printf("The Random Number Generator determined your defense is: %d\n", myChar->hp);
 
 
 printf("Which race is your character?\n");
@@ -63,7 +63,7 @@ printf("tmp %d\n", tmp);
 
 switch(tmp) {
 	case 1:
-		myChar->armour += 2;
+		myChar->hp += 2;
 		strncpy(myChar->race, "Orc\0", 6);
 
 	case 2:
@@ -99,7 +99,7 @@ switch(tmp_class) {
 		myChar->magic +=2;
 	case 3:
 		strncpy(myChar->class, "Warrior\0", 8);
-		myChar->armour +=2;
+		myChar->hp +=2;
 	case 4:
 		myChar->attack +=2;
 		strncpy(myChar->class, "Archer\0", 8);
