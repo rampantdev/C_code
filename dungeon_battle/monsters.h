@@ -2,7 +2,7 @@
 
 struct Monster {
 	char name[50];
-	int armour;
+	int hp;
 	int attack;
 	int magic;
 	int defense;

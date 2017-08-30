@@ -7,6 +7,8 @@ struct Character {
 	int hp;
 	int attack;
 	int magic;
+	int xp;
+	int level;
 	
 } Character;
 
@@ -119,7 +121,8 @@ scanf("%s", myChar->owner);
 printf("What weapon are you using?\n");
 scanf("%s", myChar->weapon);
 
-
+myChar->xp = 0;
+myChar->level = 1; 
 
 printf("New Character Created: \n");
 

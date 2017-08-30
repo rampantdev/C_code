@@ -5,6 +5,8 @@
 #include <sqlite3.h>
 #include "monsters.h"
 #include "characters.h"
+#include "battle.h"
+
 
 int newmonster()
 {
@@ -124,9 +126,11 @@ int main()
 	}
 	//else need to pull their character data from sqlite
 
-	int noink = newMonster();
 
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
+
+
+	//battle(currentCharacter);
 
 	return 0;
 }
