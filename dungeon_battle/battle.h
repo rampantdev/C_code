@@ -1,5 +1,4 @@
-#include "commonFunctions.h"
-#include "xp_levels.h"
+#include "monsters.h"
 
 int attack()
 {
@@ -13,11 +12,13 @@ int attack()
 
 //file to capture a battle scenario
 
+
 int battle(struct Character* currentChar)
 {
 	
-	struct Monster* currentMonster;
-	currentMonster = newMonster();
+	//struct Monster* currentMonster;
+	//*currentMonster = newMonster();
+	struct Monster *currentMonster = malloc(sizeof(Monster));
 
 	int gained_xp;
 	int current_dmg;
@@ -36,7 +37,8 @@ int battle(struct Character* currentChar)
 	if(first_strike == 0){
 		printf("%s has first strike advantage!\n", currentChar->name);
 		monsterCurrentLife -= current_dmg;
-		
+	}
+
 	if(first_strike == 1){
 		printf("%s has caught %s offguard!\n", currentMonster->name, currentChar->name);
 		characterCurrentLife -= current_dmg;
@@ -44,7 +46,7 @@ int battle(struct Character* currentChar)
 	
 	if(characterCurrentLife < currentChar->hp){
 		printf("You've died, game over!\n");
-		exitgame();
+		exitGame();
 	}
 	
 	if(monsterCurrentLife < currentMonster->hp){
@@ -53,5 +55,6 @@ int battle(struct Character* currentChar)
 		currentChar->xp = currentChar->xp + gained_xp;	
 		currentChar->level = getLevel(currentChar->xp);
 	}
+
 }
 

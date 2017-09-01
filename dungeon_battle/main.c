@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sqlite3.h>
-#include "monsters.h"
 #include "characters.h"
+#include "commonFunctions.h"
+#include "xp_levels.h"
 #include "battle.h"
 
 
@@ -42,7 +43,7 @@ int main()
 	//need to retrieve list of character names from sqlitedb
 
 	//re-enable the below scanf for prod
-	//scanf("%d", &menu); 
+	scanf("%d", &menu); 
 
 		sqlite3 *db;
 		char *zErrMsg = 0;
@@ -74,19 +75,12 @@ int main()
 		 printf("Did the table creation work? %d\n", rc);
 
 	//change this back to menu == 1, this was changed for debugging
-	if(menu = 1)
+	if(menu == 1)
 	{ 
 	currentCharacter = newchar();	
 			//need to pull out the last number we used as a character ID so that we can assign the nex sequential number
 		//isn't this built into sql?
 	
-	/*
-	snprintf(sql, 1000, "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, ARMOUR, ATTACK, MAGIC) "  \
-          "VALUES (1, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
-          currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->armour,
-          currentCharacter->attack, currentCharacter->magic);
-	*/
-
 	printf("Name %s\n", currentCharacter->name);
 	printf("Race: %s\n", currentCharacter->race);
 	printf("Class: %s\n", currentCharacter->class);
@@ -134,5 +128,3 @@ int main()
 
 	return 0;
 }
-
-

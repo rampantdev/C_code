@@ -3,7 +3,7 @@ int location()
 
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 9;
+	int roll = rand() % 8;
 	char location[20];
 
 	printf("ROLL in locations %d\n", roll);
