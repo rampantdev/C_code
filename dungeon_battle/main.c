@@ -18,6 +18,20 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
    return 0;
 }
 
+
+static int callback_insert(void *data, int argc, char **argv, char **azColName){
+   int i;
+   fprintf(stderr, "%s: ", (const char*)data);
+   
+   for(i = 0; i<argc; i++){
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   
+   printf("\n");
+   return 0;
+}
+
+
 int main() 
 {
 	int menu;
@@ -98,10 +112,12 @@ int main()
 	
 	else 
 	{	
-
+		const char* data = "Callback function called";
 		//retrieve sqlite record 
-		*sql = "SELECT FROM CHARACTERS (ID,NAME,RACE,CLASS,OWNER) "  \
-          "VALUES (1, '%s', '%s', '%s', '%s');";
+		sql = "SELECT ID, NAME, RACE, CLASS, OWNER FROM CHARACTERS";
+
+        rc = sqlite3_exec(db, sql, callback_insert, (void*)data, &zErrMsg);
+    	printf("%d\n", rc);
 
 	}
 	//else need to pull their character data from sqlite
