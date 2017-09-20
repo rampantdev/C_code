@@ -18,7 +18,7 @@ int deriveAttackPower()
 {
 	time_t t;
 	srand((unsigned) time(&t));
-	int attack = rand() % 7;
+	int attack = (rand() % 7) +1;
 	
 	return attack;
 }
@@ -28,7 +28,8 @@ int deriveDefensePower()
 {
 	time_t t;
 	srand((unsigned) time(&t));
-	int hp = rand() % 7;
+	int hp = (rand() % 7) +1;
+	//printf("THIS IS MY HP AFTER RAND: %d\n", hp);
 	return hp;
 }
 
@@ -37,17 +38,17 @@ int newchar()
 struct Character *myChar = malloc(sizeof(Character));
 
 
-printf("Size of the struct we malloc'd: %d\n", sizeof(Character));
+//printf("Size of the struct we malloc'd: %d\n", sizeof(Character));
 
 if(!myChar) {
 	return 1;
 }
 
 
-myChar->attack += deriveAttackPower();
+myChar->attack = deriveAttackPower();
 printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
 
-myChar->hp += deriveDefensePower();
+myChar->hp = deriveDefensePower();
 printf("The Random Number Generator determined your defense is: %d\n", myChar->hp);
 
 
@@ -67,20 +68,25 @@ switch(tmp) {
 	case 1:
 		myChar->hp += 2;
 		strncpy(myChar->race, "Orc\0", 6);
+		break;
 
 	case 2:
 		myChar->magic +=2;
 		strncpy(myChar->race, "Elf\0", 6);
+		break;
 
 	case 3:
 		strncpy(myChar->race, "Human\0", 6);
+		break;
+
 	case 4:
 		strncpy(myChar->race, "Gnome\0", 6);
+		break;
+
 	case 5:
 		strncpy(myChar->race, "Dwarf\0", 6);
+		break;
 }
-
-	
 printf("Which class is your character?\n");
 printf("1 - Wizard\n");
 printf("2 - Priest\n");
@@ -95,20 +101,27 @@ switch(tmp_class) {
 	case 1:
 		strncpy(myChar->class, "Wizard\0", 8);
 		myChar->magic +=2;
+		break;
+
 	case 2:
 		strncpy(myChar->class, "Priest\0", 8);
-
 		myChar->magic +=2;
+		break;
+
 	case 3:
 		strncpy(myChar->class, "Warrior\0", 8);
 		myChar->hp +=2;
+		break;
+
 	case 4:
-		myChar->attack +=2;
 		strncpy(myChar->class, "Archer\0", 8);
+		myChar->attack +=2;
+		break;
 
 	case 5:
-		myChar->attack +=2;
 		strncpy(myChar->class, "Rogue\0", 8);
+		myChar->attack +=2;
+		break;
 }
 
 printf("Enter the name of your char\n");
