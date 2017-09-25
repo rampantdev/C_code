@@ -36,16 +36,10 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
 	struct Character currentCharacter){
   	int i;
    
- 	//setup the struct to hold the data we're about to retrieve 
-    //struct Character *myChar = malloc(sizeof(Character));
-	
    fprintf(stderr, "%s: ", (const char*)data);
    
-   //printf("\nMARKER %s\n", myChar->name);
-   
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-       //sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC FROM CHARACTERS WHERE ID = %d", id);\
-  
+   
      	char temp[50];
 
 		strcpy(temp, argv[1]);
@@ -66,21 +60,28 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
 		strcpy(temp, argv[5]);
    	 	*currentCharacter.weapon = temp;
 
-   	 	//segfault starts here
-		static int tmp_int;
+   	 	int tmp_int;
+		
 		tmp_int = atoi(argv[6]);
 		
-		//currentCharacter.hp = malloc(sizeof(currentCharacter.hp));
-		//memcpy(currentCharacter.hp, tmp_int, sizeof(tmp_int));
-/*
-		strcpy(temp, argv[7]);
-   	 	currentCharacter.attack = temp;
+		currentCharacter.hp = tmp_int;
+		printf("CURRENT HP %d\n", currentCharacter.hp);
 
-		strcpy(temp, argv[8]);
-   	 	currentCharacter.magic = temp;
-*/
-   	 	//printf("YODAWG: %s\n", currentCharacter.name);
-   
+		printf("arg 7: %d\n", atoi(argv[7]));
+
+
+		tmp_int = atoi(argv[7]);
+
+		//line below caises segfault;
+		currentCharacter.attack = tmp_int;
+
+		//printf("CURRENT ATTACK %d\n", currentCharacter.attack);
+/*
+		tmp_int = atoi(argv[8]);
+		currentCharacter.attack = tmp_int;
+		printf("CURRENT MAGIC %d\n", currentCharacter.magic);
+
+*/   
    printf("\n");
    return tmp_int;
 }
