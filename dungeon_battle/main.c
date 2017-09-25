@@ -8,7 +8,6 @@
 #include "xp_levels.h"
 #include "battle.h"
 
-//this function used for the sqlite calls, TBH have no idea what it does
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
    int i;
    for(i = 0; i<argc; i++) {
@@ -31,6 +30,60 @@ static int callback_insert(void *data, int argc, char **argv, char **azColName){
    return 0;
 }
 
+//used to assign sleected character data to a character struct, so that a user can continue with a 
+//previously started character
+static int callback_retrieve(void *data, int argc, char **argv, char **azColName, 
+	struct Character currentCharacter){
+  	int i;
+   
+ 	//setup the struct to hold the data we're about to retrieve 
+    //struct Character *myChar = malloc(sizeof(Character));
+	
+   fprintf(stderr, "%s: ", (const char*)data);
+   
+   //printf("\nMARKER %s\n", myChar->name);
+   
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+       //sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC FROM CHARACTERS WHERE ID = %d", id);\
+  
+     	char temp[50];
+
+		strcpy(temp, argv[1]);
+   	 	*currentCharacter.name = temp;
+      
+		strcpy(temp, argv[1]);
+   	 	*currentCharacter.name = temp;
+
+   	 	strcpy(temp, argv[2]);
+   	 	*currentCharacter.race = temp;
+
+   	 	strcpy(temp, argv[3]);
+   	 	*currentCharacter.class = temp;
+
+   	 	strcpy(temp, argv[4]);
+   	 	*currentCharacter.owner = temp;
+   	  
+		strcpy(temp, argv[5]);
+   	 	*currentCharacter.weapon = temp;
+
+   	 	//segfault starts here
+		static int tmp_int;
+		tmp_int = atoi(argv[6]);
+		
+		//currentCharacter.hp = malloc(sizeof(currentCharacter.hp));
+		//memcpy(currentCharacter.hp, tmp_int, sizeof(tmp_int));
+/*
+		strcpy(temp, argv[7]);
+   	 	currentCharacter.attack = temp;
+
+		strcpy(temp, argv[8]);
+   	 	currentCharacter.magic = temp;
+*/
+   	 	//printf("YODAWG: %s\n", currentCharacter.name);
+   
+   printf("\n");
+   return tmp_int;
+}
 
 int main() 
 {
@@ -119,8 +172,24 @@ int main()
         rc = sqlite3_exec(db, sql, callback_insert, (void*)data, &zErrMsg);
     	printf("%d\n", rc);
 
+    	int id;
+    	scanf("%d", &id);
+
+    	//build sql query to retrive selected character	
+    	char *sqlRetreive[500];
+
+    	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC FROM CHARACTERS WHERE ID = %d", id);\
+		//printf("SQL Retrive: %s\n", sqlRetreive);
+    	
+
+
+   
+
+    	//pull the char record
+    	rc = sqlite3_exec(db, sqlRetreive, callback_retrieve, (void*)data, &zErrMsg);
+
+		printf("Nmae of xdwqd:;:: %s\n", currentCharacter->name);
 	}
-	//else need to pull their character data from sqlite
 
 
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
