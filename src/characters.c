@@ -1,4 +1,5 @@
 struct Character {
+	int id;
 	char name[20];
 	char race[6];
 	char class[8];
