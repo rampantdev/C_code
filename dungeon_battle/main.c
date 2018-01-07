@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sqlite3.h>
-#include "characters.h"
-#include "commonFunctions.h"
-#include "xp_levels.h"
-#include "battle.h"
+#include "characters.c"
+#include "commonFunctions.c"
+#include "xp_levels.c"
+#include "battle.c"
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
    int i;

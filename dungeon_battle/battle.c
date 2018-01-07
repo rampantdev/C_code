@@ -1,4 +1,4 @@
-#include "monsters.h"
+#include "monsters.c"
 
 int attack()
 {

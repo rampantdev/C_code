@@ -1,4 +1,4 @@
-#include "locations.h"
+#include "locations.c"
 
 struct Monster {
 	char name[50];
