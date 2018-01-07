@@ -24,7 +24,7 @@ int deriveAttackPower()
 }
 
 
-int deriveDefensePower()
+int deriveHP()
 {
 	time_t t;
 	srand((unsigned) time(&t));
@@ -48,7 +48,7 @@ if(!myChar) {
 myChar->attack = deriveAttackPower();
 printf("The Random Number Generator determined your attack power is: %d\n", myChar->attack);
 
-myChar->hp = deriveDefensePower();
+myChar->hp = deriveHP();
 printf("The Random Number Generator determined your defense is: %d\n", myChar->hp);
 
 
