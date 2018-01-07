@@ -147,9 +147,7 @@ int main()
 	if(menu == 1)
 	{ 
 	currentCharacter = newchar();	
-			//need to pull out the last number we used as a character ID so that we can assign the nex sequential number
-		//isn't this built into sql?
-
+	
 	char * sql_insert[1000];
 	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER,WEAPON,HP,ATTACK,MAGIC,XP) \0";
 	char sql_tmp2[500];	 
@@ -169,9 +167,42 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     if(rc != 0)
     	printf("Character creation has failed!\n");
 	
-	}
+			//need to pull out the last number we used as a character ID so that we can assign the nex sequential number
+		//isn't this built into sql?
 	
+	
+
+		char *sql_id = "SELECT MAX(ID) FROM CHARACTERS;";
+
+		sqlite3_stmt *stmt;
+		rc = sqlite3_prepare_v2(db, sql_id, -1, &stmt, NULL);
+		if (rc != SQLITE_OK) {
+    		printf("error: ", sqlite3_errmsg(db));
+    		return;
+		}
+
+		while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+    		
+    		int temp;
+        	temp= sqlite3_column_int (stmt, 0);
+ 			
+ 			currentCharacter->id = temp;
+
+ 		/* although the sql prepare returns the proper ID; it still gives a return value indiciating it failed
+ 		//need to fix in the future
+		if (rc != SQLITE_DONE) {
+    			printf("error: %s\n", sqlite3_errmsg(db));
+			}
+	//	sqlite3_finalize(stmt); //this doesn' work in this context - not sure why
+	
+	*/
+		}
+	
+	}
+
+		
 	else 
+		//user has chosen to resume playing an already created character
 	{	
 
 		const char* data = "Callback function called";
@@ -192,6 +223,7 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     	currentCharacter = retrieveCharacter(db, sqlRetreive);	
 }	
 	
+	printf("ID %d\n", currentCharacter->id);
 	printf("Name %s\n", currentCharacter->name);
 	printf("Race: %s\n", currentCharacter->race);
 	printf("Class: %s\n", currentCharacter->class);
