@@ -190,22 +190,6 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);\
 
     	currentCharacter = retrieveCharacter(db, sqlRetreive);	
-	
-		//printf("SQL Retrive: %s\n", sqlRetreive);   
-
-    	//pull the char record
-
-/* 
-    	rc = sqlite3_exec(db, sqlRetreive, callback_retrieve, (void*)data, &zErrMsg);
-
-    	if(rc != 0)
-    		printf("SQL Retrieval has failed!\n");
- 	   	//printf("DID I RETURN?\n");
-
-    	printf("rc %d\n", rc);
-		printf("Nmae of xdwqd:;:: %s\n", currentCharacter->name);
-	}
-*/
 }	
 	
 	printf("Name %s\n", currentCharacter->name);
