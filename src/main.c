@@ -242,7 +242,7 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 	while(go) {
 	battle(currentCharacter);
 
-	printf("Continue Adventure? \n 1 - Yes \t 0 - No");
+	printf("Continue Adventure? \n 1 - Yes \t 0 - No\n");
 	scanf("%d", &go);
 	//need to verify either 1 or 0 was entered
 	}

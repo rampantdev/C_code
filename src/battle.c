@@ -16,9 +16,9 @@ int attack()
 int battle(struct Character* currentChar)
 {
 	
-	//struct Monster* currentMonster;
-	//*currentMonster = newMonster();
-	struct Monster *currentMonster = malloc(sizeof(Monster));
+	struct Monster *currentMonster;
+	currentMonster = newMonster();
+	//struct Monster *currentMonster = malloc(sizeof(Monster));
 
 	int gained_xp;
 	int current_dmg;
@@ -28,9 +28,9 @@ int battle(struct Character* currentChar)
 	//determine who strikes first
 	time_t t;
 	srand((unsigned) time(&t));
-	int first_strike = rand() % 1;
+	int first_strike = rand() % 2;
 	
-
+	printf("FIRST STRIKE: %d\n", first_strike);
 	
 	current_dmg = attack;
 
@@ -52,7 +52,7 @@ int battle(struct Character* currentChar)
 	if(monsterCurrentLife < currentMonster->hp){
 		printf("Monster defeated!\n");
 		gained_xp = getXP();
-		currentChar->xp = currentChar->xp + gained_xp;	
+		currentChar->xp += gained_xp;	
 		currentChar->level = getLevel(currentChar->xp);
 	}
 

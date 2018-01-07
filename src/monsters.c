@@ -61,7 +61,7 @@ char* monsterTypes()
 	return type;
 }
 
-int newMonster()
+struct Monster *newMonster()
 {
 	struct Monster *newMonster = malloc(sizeof(Monster));
 	
@@ -100,4 +100,5 @@ int newMonster()
 	printf("Monster name: %s\n", newMonster->name);
 	//*newMonster->name = ("%s of %s", type, location()); 
 
+	return newMonster;
 }

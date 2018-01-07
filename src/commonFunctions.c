@@ -1,6 +1,7 @@
-int exitGame()
+void exitGame()
 {
 	printf("THE GAME IS OVER!!!!!!!!!!!!!!!!!!!\n");
+	return exit(0);
 }
 
 int getXP()
