@@ -20,6 +20,8 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 
 
 static int callback_insert(void *data, int argc, char **argv, char **azColName){
+//used for initial character creation and also used to retrive char list of stored characters so that a user can choose which char
+//to resume playing when logging back in
    int i;
    fprintf(stderr, "%s: ", (const char*)data);
    
@@ -31,8 +33,7 @@ static int callback_insert(void *data, int argc, char **argv, char **azColName){
    return 0;
 }
 
-static int callback_retrieve(void *data, int argc, char **argv, char **azColName, 
-	struct Character currentCharacter){
+static int callback_retrieve(void *data, int argc, char **argv, char **azColName){
 //used to assign sleected character data to a character struct, so that a user can continue with a 
 //previously started character
 
@@ -40,30 +41,38 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
    
    fprintf(stderr, "%s: ", (const char*)data);
    
-      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+      //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
    
+   		struct Character *tempChar = malloc(sizeof(Character));
+
      	char temp[50];
 
 		strcpy(temp, argv[1]);
-   	 	*currentCharacter.name = temp;
+   	 	*tempChar->name = temp;
 
    	 	strcpy(temp, argv[2]);
-   	 	*currentCharacter.race = temp;
+   	 	*tempChar->race = temp;
 
    	 	strcpy(temp, argv[3]);
-   	 	*currentCharacter.class = temp;
+   	 	*tempChar->class = temp;
 
    	 	strcpy(temp, argv[4]);
-   	 	*currentCharacter.owner = temp;
+   	 	*tempChar->owner = temp;
    	  
 		strcpy(temp, argv[5]);
-   	 	*currentCharacter.weapon = temp;
+   	 	*tempChar->weapon = temp;
 
-		currentCharacter.hp = temp;
-		currentCharacter.attack = temp;
-		currentCharacter.magic = temp;
-		currentCharacter.xp = temp;
+		tempChar->hp = argv[6];
+		tempChar->attack = argv[7];
+		tempChar->magic = argv[8];
+		tempChar->xp = argv[9];
 
+		printf("assignments all good?\n");
+
+
+   		printf("\n");
+		return tempChar;
+/*
 
    	 	int tmp_int;
 		
@@ -81,14 +90,12 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
 		currentCharacter.attack = tmp_int;
 
 		//printf("CURRENT ATTACK %d\n", currentCharacter.attack);
-/*
+
 		tmp_int = atoi(argv[8]);
 		currentCharacter.attack = tmp_int;
 		printf("CURRENT MAGIC %d\n", currentCharacter.magic);
 
 */   
-   printf("\n");
-   return tmp_int;
 }
 
 int main() 
@@ -194,6 +201,9 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     	//pull the char record
     	rc = sqlite3_exec(db, sqlRetreive, callback_retrieve, (void*)data, &zErrMsg);
 
+    	if(rc != 0)
+    		printf("SQL Retrieval has failed!\n");
+ 	   	//printf("DID I RETURN?\n");
 		printf("Nmae of xdwqd:;:: %s\n", currentCharacter->name);
 	}
 
