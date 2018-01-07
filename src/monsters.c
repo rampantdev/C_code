@@ -56,8 +56,6 @@ char* monsterTypes()
 			printf("ERROR MONSTER TYPE FAIL\n");
 	}
 
-	printf("Dice Roll for type-gen: %d\n", roll);
-	printf("Type in type generator: %s\n", type);
 	return type;
 }
 
@@ -71,34 +69,14 @@ struct Monster *newMonster()
 		printf("New Monster allocation has failed\n");
 	}	
 
-	char *type = monsterTypes();
-
-	//*newMonster->type = tmp;
-	printf("TYPE: %s\n", type);
-	
-	
+	char *type = monsterTypes();	
 	strcpy(newMonster->type, type);
 	printf("Monster type: %s\n", newMonster->type);
 	
 	char tmp[50];
-	
-/*
-	this block of code doesn't work. I don't know why it doesn't give us a location value. 
-	Note that locations.h doesn't return a value.. however when we pass location() directly into strcat it works fine
-	I don't know why this is -> investigate as time allows
-
-	*tmp = location();
-	printf("Location: %s\n", tmp);
-
-*/
-	strcpy(newMonster->name, type);
-	
+	strcpy(newMonster->name, type);	
 	strcat(newMonster->name, " of ");
 	strcat(newMonster->name, location());
-
-	//*newMonster->name = tmp;
-	printf("Monster name: %s\n", newMonster->name);
-	//*newMonster->name = ("%s of %s", type, location()); 
 
 	return newMonster;
 }
