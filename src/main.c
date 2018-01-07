@@ -9,6 +9,7 @@
 #include "battle.c"
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+//used to insert newly created characters into the db
    int i;
    for(i = 0; i<argc; i++) {
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
@@ -30,10 +31,11 @@ static int callback_insert(void *data, int argc, char **argv, char **azColName){
    return 0;
 }
 
-//used to assign sleected character data to a character struct, so that a user can continue with a 
-//previously started character
 static int callback_retrieve(void *data, int argc, char **argv, char **azColName, 
 	struct Character currentCharacter){
+//used to assign sleected character data to a character struct, so that a user can continue with a 
+//previously started character
+
   	int i;
    
    fprintf(stderr, "%s: ", (const char*)data);
@@ -42,9 +44,6 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
    
      	char temp[50];
 
-		strcpy(temp, argv[1]);
-   	 	*currentCharacter.name = temp;
-      
 		strcpy(temp, argv[1]);
    	 	*currentCharacter.name = temp;
 
@@ -59,6 +58,12 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
    	  
 		strcpy(temp, argv[5]);
    	 	*currentCharacter.weapon = temp;
+
+		currentCharacter.hp = temp;
+		currentCharacter.attack = temp;
+		currentCharacter.magic = temp;
+		currentCharacter.xp = temp;
+
 
    	 	int tmp_int;
 		
@@ -123,7 +128,8 @@ int main()
          "WEAPON        CHAR(50)," \
          "HP        INT(50)," \
          "ATTACK        INT(50)," \
-         "MAGIC        INT(50));";
+         "MAGIC        INT(50)," \
+         "XP           int(50));";
 		
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
@@ -143,25 +149,26 @@ int main()
 	printf("HP: %d\n", currentCharacter->hp);
 	printf("Attack: %d\n", currentCharacter->attack);
 	printf("Magic: %d\n", currentCharacter->magic);
-	
+	printf("XP: %d\n", currentCharacter->xp);
 
 	char * sql_insert[1000];
-	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, HP, ATTACK, MAGIC) \0";
+	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, HP, ATTACK, MAGIC, XP) \0";
 	char sql_tmp2[500];	 
 
 	
-	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
+	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d, %d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
-          currentCharacter->attack, currentCharacter->magic);
+          currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
 
 	strcpy(sql_insert, sql_tmp);
 	strcat(sql_insert, sql_tmp2);
 
+	printf("TESTING : %s\n", sql_insert);
 
     rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
-    printf("Did the character insert work? %d\n", rc);
-//	printf("Did the character insert work?: %d\n", rc);	
-	
+    if(rc != 0)
+    	printf("Character creation has failed!\n");
+
 	}
 	
 	else 
@@ -179,7 +186,7 @@ int main()
     	//build sql query to retrive selected character	
     	char *sqlRetreive[500];
 
-    	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC FROM CHARACTERS WHERE ID = %d", id);\
+    	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);\
 		//printf("SQL Retrive: %s\n", sqlRetreive);
     	
 
