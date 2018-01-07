@@ -13,6 +13,29 @@ int getXP()
 	return roll;	
 }
 
+
+
+int deriveAttackPower()
+{
+	time_t t;
+	srand((unsigned) time(&t));
+	int attack = (rand() % 7) +1;
+	
+	return attack;
+}
+
+
+int deriveHP()
+{
+	time_t t;
+	srand((unsigned) time(&t));
+	int hp = (rand() % 7) +1;
+	//printf("THIS IS MY HP AFTER RAND: %d\n", hp);
+	return hp;
+}
+
+
+
 int retrieveCharacter(sqlite3 *db, char *sqlRetreive)
 {
 
