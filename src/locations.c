@@ -6,8 +6,6 @@ int location()
 	int roll = rand() % 8;
 	char location[20];
 
-	printf("ROLL in locations %d\n", roll);
-
 	switch(roll)
 	{
 		case 1:

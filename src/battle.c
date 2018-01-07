@@ -29,9 +29,8 @@ int battle(struct Character* currentChar)
 	time_t t;
 	srand((unsigned) time(&t));
 	int first_strike = rand() % 2;
-	
-	printf("FIRST STRIKE: %d\n", first_strike);
-	
+
+	//need to go into monsters and define functions to create monster attack values
 	current_dmg = attack;
 
 	if(first_strike == 0){

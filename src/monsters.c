@@ -7,6 +7,7 @@ struct Monster {
 	int magic;
 	int defense;
 	char type[15];
+	char location[15];
 
 } Monster;
 
@@ -71,12 +72,14 @@ struct Monster *newMonster()
 
 	char *type = monsterTypes();	
 	strcpy(newMonster->type, type);
-	printf("Monster type: %s\n", newMonster->type);
 	
-	char tmp[50];
+	char *tmp = location();
+	*newMonster->location = tmp;
+
+	//concatenate our monster and location to make it unique
 	strcpy(newMonster->name, type);	
 	strcat(newMonster->name, " of ");
-	strcat(newMonster->name, location());
+	strcat(newMonster->name, tmp);
 
 	return newMonster;
 }
