@@ -238,9 +238,14 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
 
 
+	int go = 1;
+	while(go) {
+	battle(currentCharacter);
 
-
-	//battle(currentCharacter);
+	printf("Continue Adventure? \n 1 - Yes \t 0 - No");
+	scanf("%d", &go);
+	//need to verify either 1 or 0 was entered
+	}
 
 	return 0;
 }
