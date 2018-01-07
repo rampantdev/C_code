@@ -119,6 +119,7 @@ int main()
    	}
 
 
+
 		sql = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
@@ -129,8 +130,8 @@ int main()
          "HP        INT(50)," \
          "ATTACK        INT(50)," \
          "MAGIC        INT(50)," \
-         "XP           int(50));";
-		
+		 "XP        INT(50));";
+
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
 
@@ -144,7 +145,7 @@ int main()
 	printf("Name %s\n", currentCharacter->name);
 	printf("Race: %s\n", currentCharacter->race);
 	printf("Class: %s\n", currentCharacter->class);
-	printf("Owner: %s\n", currentCharacter->owner);
+               	printf("Owner: %s\n", currentCharacter->owner);
 	printf("Weapon: %s\n", currentCharacter->weapon);
 	printf("HP: %d\n", currentCharacter->hp);
 	printf("Attack: %d\n", currentCharacter->attack);
@@ -152,23 +153,24 @@ int main()
 	printf("XP: %d\n", currentCharacter->xp);
 
 	char * sql_insert[1000];
-	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER, WEAPON, HP, ATTACK, MAGIC, XP) \0";
+	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER,WEAPON,HP,ATTACK,MAGIC,XP) \0";
 	char sql_tmp2[500];	 
 
 	
-	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d, %d');", currentCharacter->name, currentCharacter->race,
+sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
           currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
           currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
 
 	strcpy(sql_insert, sql_tmp);
 	strcat(sql_insert, sql_tmp2);
 
-	printf("TESTING : %s\n", sql_insert);
+	//printf("TESTING : %s\n", sql_insert);
 
     rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
+    
     if(rc != 0)
     	printf("Character creation has failed!\n");
-
+	
 	}
 	
 	else 
@@ -187,11 +189,7 @@ int main()
     	char *sqlRetreive[500];
 
     	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);\
-		//printf("SQL Retrive: %s\n", sqlRetreive);
-    	
-
-
-   
+		//printf("SQL Retrive: %s\n", sqlRetreive);   
 
     	//pull the char record
     	rc = sqlite3_exec(db, sqlRetreive, callback_retrieve, (void*)data, &zErrMsg);
