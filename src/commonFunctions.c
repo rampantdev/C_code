@@ -29,7 +29,7 @@ int deriveHP()
 {
 	time_t t;
 	srand((unsigned) time(&t));
-	int hp = (rand() % 7) +1;
+	int hp = (rand() % 10) +1;
 	//printf("THIS IS MY HP AFTER RAND: %d\n", hp);
 	return hp;
 }
