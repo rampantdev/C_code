@@ -71,7 +71,8 @@ static int callback_retrieve(void *data, int argc, char **argv, char **azColName
 
 
    		printf("\n");
-		return tempChar;
+		return 0;
+		//need to figure out how to send this data back to main()... 
 /*
 
    	 	int tmp_int;
@@ -148,16 +149,6 @@ int main()
 	currentCharacter = newchar();	
 			//need to pull out the last number we used as a character ID so that we can assign the nex sequential number
 		//isn't this built into sql?
-	
-	printf("Name %s\n", currentCharacter->name);
-	printf("Race: %s\n", currentCharacter->race);
-	printf("Class: %s\n", currentCharacter->class);
-               	printf("Owner: %s\n", currentCharacter->owner);
-	printf("Weapon: %s\n", currentCharacter->weapon);
-	printf("HP: %d\n", currentCharacter->hp);
-	printf("Attack: %d\n", currentCharacter->attack);
-	printf("Magic: %d\n", currentCharacter->magic);
-	printf("XP: %d\n", currentCharacter->xp);
 
 	char * sql_insert[1000];
 	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER,WEAPON,HP,ATTACK,MAGIC,XP) \0";
@@ -182,6 +173,7 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 	
 	else 
 	{	
+
 		const char* data = "Callback function called";
 		//retrieve sqlite record 
 		sql = "SELECT ID, NAME, RACE, CLASS, OWNER FROM CHARACTERS";
@@ -196,22 +188,45 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     	char *sqlRetreive[500];
 
     	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);\
+
+    	currentCharacter = retrieveCharacter(db, sqlRetreive);	
+	
 		//printf("SQL Retrive: %s\n", sqlRetreive);   
 
     	//pull the char record
+
+/* 
     	rc = sqlite3_exec(db, sqlRetreive, callback_retrieve, (void*)data, &zErrMsg);
 
     	if(rc != 0)
     		printf("SQL Retrieval has failed!\n");
  	   	//printf("DID I RETURN?\n");
+
+    	printf("rc %d\n", rc);
 		printf("Nmae of xdwqd:;:: %s\n", currentCharacter->name);
 	}
+*/
+}	
+	
+	printf("Name %s\n", currentCharacter->name);
+	printf("Race: %s\n", currentCharacter->race);
+	printf("Class: %s\n", currentCharacter->class);
+    printf("Owner: %s\n", currentCharacter->owner);
+	printf("Weapon: %s\n", currentCharacter->weapon);
+	printf("HP: %d\n", currentCharacter->hp);
+	printf("Attack: %d\n", currentCharacter->attack);
+	printf("Magic: %d\n", currentCharacter->magic);
+	printf("XP: %d\n", currentCharacter->xp);
 
 
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
+
+
 
 
 	//battle(currentCharacter);
 
 	return 0;
 }
+
+
