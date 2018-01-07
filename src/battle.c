@@ -30,17 +30,15 @@ int battle(struct Character* currentChar)
 	srand((unsigned) time(&t));
 	int first_strike = rand() % 2;
 
-	//need to go into monsters and define functions to create monster attack values
-	current_dmg = attack;
-
+	//batte begins
 	if(first_strike == 0){
 		printf("%s has first strike advantage!\n", currentChar->name);
-		monsterCurrentLife -= current_dmg;
+		monsterCurrentLife -= currentChar->attack;
 	}
 
 	if(first_strike == 1){
 		printf("%s has caught %s offguard!\n", currentMonster->name, currentChar->name);
-		characterCurrentLife -= current_dmg;
+		characterCurrentLife -= currentMonster->attack;
 	}
 	
 	if(characterCurrentLife < currentChar->hp){

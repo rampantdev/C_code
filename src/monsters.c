@@ -5,7 +5,6 @@ struct Monster {
 	int hp;
 	int attack;
 	int magic;
-	int defense;
 	char type[15];
 	char location[15];
 
@@ -65,8 +64,7 @@ struct Monster *newMonster()
 	struct Monster *newMonster = malloc(sizeof(Monster));
 	
 
-	if(!newMonster)
-	{
+	if(!newMonster) {
 		printf("New Monster allocation has failed\n");
 	}	
 
@@ -81,5 +79,8 @@ struct Monster *newMonster()
 	strcat(newMonster->name, " of ");
 	strcat(newMonster->name, tmp);
 
+	newMonster->attack = deriveAttackPower();
+	newMonster->hp = deriveHP();
+	printf("monsta attack: \n", newMonster->attack);
 	return newMonster;
 }
