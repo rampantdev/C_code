@@ -45,7 +45,10 @@ int main()
 
 	struct Character *currentCharacter;
 
-	printf("Choose Character\n");
+	
+	printf("1: Create Character\n2: Retrieve Existing Character");
+
+	//printf("Choose Character\n");
 	//need to retrieve list of character names from sqlitedb
 
 	//re-enable the below scanf for prod
