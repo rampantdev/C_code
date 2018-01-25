@@ -161,18 +161,8 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     	currentCharacter = retrieveCharacter(db, sqlRetreive);	
 }	
 	
-	printf("ID %d\n", currentCharacter->id);
-	printf("Name %s\n", currentCharacter->name);
-	printf("Race: %s\n", currentCharacter->race);
-	printf("Class: %s\n", currentCharacter->class);
-    printf("Owner: %s\n", currentCharacter->owner);
-	printf("Weapon: %s\n", currentCharacter->weapon);
-	printf("HP: %d\n", currentCharacter->hp);
-	printf("Attack: %d\n", currentCharacter->attack);
-	printf("Magic: %d\n", currentCharacter->magic);
-	printf("XP: %d\n", currentCharacter->xp);
-
-
+	
+	print_character(currentCharacter);
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
 
 

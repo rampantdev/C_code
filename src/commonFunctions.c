@@ -96,6 +96,22 @@ struct Character *myChar = malloc(sizeof(Character));
 
 	return myChar;
 }
+
+void print_character(struct Character *currentCharacter) 
+{
+	//function to print all of the stats relating to the currently selected character
+	printf("ID %d\n", currentCharacter->id);
+	printf("Name %s\n", currentCharacter->name);
+	printf("Race: %s\n", currentCharacter->race);
+	printf("Class: %s\n", currentCharacter->class);
+    printf("Owner: %s\n", currentCharacter->owner);
+	printf("Weapon: %s\n", currentCharacter->weapon);
+	printf("HP: %d\n", currentCharacter->hp);
+	printf("Attack: %d\n", currentCharacter->attack);
+	printf("Magic: %d\n", currentCharacter->magic);
+	printf("XP: %d\n", currentCharacter->xp);
+}
+
 /* new function, still broken
 int updateCharacter(struct *currentCharacter)
 {
