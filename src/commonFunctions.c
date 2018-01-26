@@ -112,30 +112,37 @@ void print_character(struct Character *currentCharacter)
 	printf("XP: %d\n", currentCharacter->xp);
 }
 
-/* new function, still broken
-int updateCharacter(struct *currentCharacter)
-{
-	//note to self
-	//lets move all the sql operations from main.c into this file
-	
-	//gather characters current stats and update them in the database	
-	char * sql_insert[1000]; //need to reduce to the real size in the future -- this is way too big!
-	char sql_tmp[] = "INSERT INTO CHARACTERS (WEAPON, HP, ATTACK, MAGIC, XP) \0";
-	char sql_tmp2[500];	 
+static int callback_tmp(void *NotUsed, int argc, char **argv, char **azColName) {
+//put this function here temporarily as the prog wasnt compiling need to refactor this out and use 1 common callback for sqlite in the future
 
-	
-	sprintf(sql_tmp2, "VALUES (NULL, '%s', '%d', '%d', '%d', '%d');", currentCharacter->weapon, currentCharacter->hp,
-          currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
-
-	strcpy(sql_insert, sql_tmp);
-	strcat(sql_insert, sql_tmp2);
-
-
-    rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
-    if(rc != 0)
-    	printf("Character Update has failed!\n");
-
-
-	//update the db with the latest character stats
+   int i;
+   for(i = 0; i<argc; i++) {
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
 }
-*/
+
+
+// new function, still broken
+int updateCharacter(struct Character *currentCharacter, sqlite3 *db)
+{
+	//create a string with all of our current stats
+	char * sql_insert[1000]; //need to reduce to the real size in the future -- this is way too big!
+	sprintf(sql_insert, "UPDATE CHARACTERS SET WEAPON = '%s', HP = %d, ATTACK = %d, MAGIC = %d, XP = %d where ID = %d\0",
+	currentCharacter->weapon, currentCharacter->hp, currentCharacter->attack, currentCharacter->magic, currentCharacter->xp,
+	  currentCharacter->id);
+	
+
+	sqlite3_stmt *statement;
+	//turns our sql statement into byte code
+    int retStatus = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
+    
+    //executes the sql statement
+    int rc = sqlite3_step(statement);
+
+    //cleans up memory
+    sqlite3_finalize(statement);
+	
+}
+

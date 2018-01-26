@@ -2,6 +2,8 @@
 
 int attack()
 {
+	//I think this code is dead
+	
 	//derive attack dmg
 	time_t t;
 	srand((unsigned) time(&t));
@@ -13,7 +15,7 @@ int attack()
 //file to capture a battle scenario
 
 
-int battle(struct Character* currentChar)
+int battle(struct Character* currentChar, sqlite3 *db)
 {
 	
 	struct Monster *currentMonster;
@@ -30,6 +32,7 @@ int battle(struct Character* currentChar)
 	srand((unsigned) time(&t));
 	int first_strike = rand() % 2;
 
+	int startLevel = currentChar->level;
 	//batte begins
 	if(first_strike == 0){
 		printf("%s has first strike advantage!\n", currentChar->name);
@@ -51,6 +54,13 @@ int battle(struct Character* currentChar)
 		gained_xp = getXP();
 		currentChar->xp += gained_xp;	
 		currentChar->level = getLevel(currentChar->xp);
+		if(currentChar->level > startLevel) {
+			currentChar->hp += deriveHP();
+			currentChar->attack += deriveAttackPower();
+		}
+
+		updateCharacter(currentChar, db);
+
 	}
 
 }

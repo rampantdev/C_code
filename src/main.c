@@ -168,7 +168,7 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 
 	int go = 1;
 	while(go) {
-	battle(currentCharacter);
+	battle(currentCharacter, db);
 
 	printf("Continue Adventure? \n 1 - Yes \t 0 - No\n");
 	scanf("%d", &go);
