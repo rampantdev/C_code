@@ -8,6 +8,7 @@
 #include "xp_levels.c"
 #include "battle.c"
 #include "cities.c"
+#include "setup.c"
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 //used to insert newly created characters into the db
@@ -82,7 +83,7 @@ int main()
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
 
-
+	//performs initializtion to ensure we have 
 	//createCities(db);
 
 	//change this back to menu == 1, this was changed for debugging

@@ -134,6 +134,7 @@ static int callback_tmp(void *NotUsed, int argc, char **argv, char **azColName) 
 // new function, still broken
 int updateCharacter(struct Character *currentCharacter, sqlite3 *db)
 {
+	printf("did we make it?\n");
 	//create a string with all of our current stats
 	char * sql_insert[1000]; //need to reduce to the real size in the future -- this is way too big!
 	sprintf(sql_insert, "UPDATE CHARACTERS SET WEAPON = '%s', HP = %d, ATTACK = %d, MAGIC = %d, XP = %d where ID = %d\0",

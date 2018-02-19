@@ -46,7 +46,7 @@ int battle(struct Character* currentChar, sqlite3 *db)
 			currentChar->hp += deriveHP();
 			currentChar->attack += deriveAttackPower();
 		}
-
+		
 		updateCharacter(currentChar, db);
 
 	}
