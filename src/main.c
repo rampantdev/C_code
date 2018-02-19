@@ -7,6 +7,7 @@
 #include "commonFunctions.c"
 #include "xp_levels.c"
 #include "battle.c"
+#include "cities.c"
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 //used to insert newly created characters into the db
@@ -80,6 +81,9 @@ int main()
 
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
+
+
+	//createCities(db);
 
 	//change this back to menu == 1, this was changed for debugging
 	if(menu == 1)
@@ -171,9 +175,20 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 	
 	//adding functionality to create different adventure scenarios
 	//right now we only have battle, but lets include things like visit a town, and just walking depending on a dice roll
-	
-	battle(currentCharacter, db);
 
+	time_t t;
+	srand((unsigned) time(&t));
+	int roll = rand() % 2;
+
+	if (roll == 0)
+		battle(currentCharacter, db);
+
+	if (roll == 1)
+		//visit a city
+		visitCity(db);
+	if (roll == 2)
+		//just walk and get some XP or something 
+		walk();
 	printf("Continue Adventure? \n 1 - Yes \t 0 - No\n");
 	scanf("%d", &go);
 	//need to verify either 1 or 0 was entered

@@ -1,3 +1,10 @@
+
+
+int walk() 
+{
+	return 0;
+}
+
 void exitGame()
 {
 	printf("THE GAME IS OVER!!!!!!!!!!!!!!!!!!!\n");

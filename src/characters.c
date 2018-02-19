@@ -78,6 +78,7 @@ printf("5 - Rogue\n");
 int tmp_class;
 scanf("%d", &tmp_class);
 
+myChar->hp += 2;
 switch(tmp_class) {
 	case 1:
 		strncpy(myChar->class, "Wizard\0", 8);

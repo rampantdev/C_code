@@ -81,6 +81,6 @@ struct Monster *newMonster()
 
 	newMonster->attack = deriveAttackPower();
 	newMonster->hp = deriveHP();
-	printf("monsta attack: \n", newMonster->attack);
+	printf("monsta attack: %d\n", newMonster->attack);
 	return newMonster;
 }

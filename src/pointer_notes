@@ -1,0 +1,8 @@
+most compilers will initialize ints to 0 if they are declared outside a function. Pointers declared outside of functions should be initialized to NULL.
+
+    char my_string[40] = "Ted"; 
+When the double quotes are used, instead of the single quotes as was done in the previous 
+examples, the nul character ( 
+'\0
+' ) is automatically appended to the end of the string.  
+
