@@ -21,7 +21,6 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
    return 0;
 }
 
-
 static int callback_insert(void *data, int argc, char **argv, char **azColName){
 //used for initial character creation and also used to retrive char list of stored characters so that a user can choose which char
 //to resume playing when logging back in
@@ -43,7 +42,7 @@ int main()
 	sqlite3 *db;
 	char *zErrMsg = 0;
 	int rc;
-	char *sql;
+	
 		
 
 	struct Character *currentCharacter;
@@ -59,17 +58,14 @@ int main()
 
 		
 	rc = sqlite3_open("dungeons.db", &db);
-
 	if( rc ) {
       fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
       return 0;
    } else {
-      fprintf(stdout, "Opened database successfully\n");
-   	}
+     	fprintf(stdout, "Opened database successfully\n");
+   	
 
-
-
-		sql = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
+		char *sql = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "RACE            CHAR(50)    NOT NULL," \
@@ -85,30 +81,23 @@ int main()
 		 printf("Did the table creation work? %d\n", rc);
 
 	//performs initializtion to ensure we have 
-	//createCities(db);
+	//rc = createCities(db);
 
 	//change this back to menu == 1, this was changed for debugging
-	if(menu == 1)
-	{ 
-	currentCharacter = newchar();	
+	if(menu == 1) { 
+		currentCharacter = newchar();	
 	
-	char *sql_insert = buildNewCharString(currentCharacter);
-	rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
-    if(rc != 0)
-    	printf("Character creation has failed!\n");
+		char *sql_insert = buildNewCharString(currentCharacter);
+		rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
+    	if(rc != 0) {
+    		printf("Character creation has failed!\n");
+    		return 1;
+    		}
 	
-	
-	currentCharacter->id = getMaxID(); //pull out the new ID that the sqlite db assigned automatically, so can later update our char
-	
+		currentCharacter->id = getMaxID(db); //pull out the new ID that the sqlite db assigned automatically, so can later update our char
 
-		}
-	
-	}
-
-		
-	else 
-		//user has chosen to resume playing an already created character
-	{	
+	} else {
+		//user has chosen to resume playing an already created characte	
 
 		const char* data = "Callback function called";
 		//retrieve sqlite record 
@@ -123,11 +112,10 @@ int main()
     	//build sql query to retrive selected character	
     	char *sqlRetreive[500];
 
-    	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);\
+    	sprintf(sqlRetreive, "SELECT ID, NAME, RACE, CLASS, OWNER, WEAPON, HP, ATTACK, MAGIC, XP FROM CHARACTERS WHERE ID = %d", id);
 
     	currentCharacter = retrieveCharacter(db, sqlRetreive);	
-}	
-	
+		}		
 	
 	print_character(currentCharacter);
 	printf("Welcome to %s's Realm\n", currentCharacter->name);
@@ -145,6 +133,7 @@ int main()
 	}
 
 	return 0;
+
+	}
+
 }
-
-

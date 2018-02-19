@@ -19,16 +19,16 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
     
 }
 
-int retrieveMaxID()
+int getMaxID(sqlite3 *db)
 {
 
 		char *sql_id = "SELECT MAX(ID) FROM CHARACTERS;";
 
 		sqlite3_stmt *stmt;
-		rc = sqlite3_prepare_v2(db, sql_id, -1, &stmt, NULL);
+		int rc = sqlite3_prepare_v2(db, sql_id, -1, &stmt, NULL);
 		if (rc != SQLITE_OK) {
     		printf("error: ", sqlite3_errmsg(db));
-    		return;
+    		return 1;
 		}
 
 		while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
@@ -36,9 +36,9 @@ int retrieveMaxID()
     		int temp;
         	temp= sqlite3_column_int (stmt, 0);
  			
- 			currentCharacter->id = temp;
-
- 		return temp;
+ 			return temp;
+		}
+}
  		/* although the sql prepare returns the proper ID; it still gives a return value indiciating it failed
  		//need to fix in the future
 		if (rc != SQLITE_DONE) {
@@ -47,4 +47,3 @@ int retrieveMaxID()
 	//	sqlite3_finalize(stmt); //this doesn' work in this context - not sure why
 	
 	*/
-}
