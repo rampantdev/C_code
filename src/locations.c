@@ -5,9 +5,12 @@ int location()
 	srand((unsigned) time(&t));
 	int roll = rand() % 8;
 	char location[20];
-
+	printf("location roll: %d\n", roll);
 	switch(roll)
 	{
+		case 0:
+			*location = "Foggy Swamp\0";
+			break;
 		case 1:
 			*location = "Dwarven Outskirts\0";
 			break;
@@ -28,9 +31,6 @@ int location()
 			break;
 		case 7:
 			*location = "Underneath a Bridge\0";
-			break;
-		case 8:
-			*location = "Foggy Swamp\0";
 			break;
 		default:
 			printf("LOCATION FAIL\n");
