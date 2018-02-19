@@ -168,6 +168,10 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 
 	int go = 1;
 	while(go) {
+	
+	//adding functionality to create different adventure scenarios
+	//right now we only have battle, but lets include things like visit a town, and just walking depending on a dice roll
+	
 	battle(currentCharacter, db);
 
 	printf("Continue Adventure? \n 1 - Yes \t 0 - No\n");
