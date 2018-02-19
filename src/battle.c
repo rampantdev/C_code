@@ -1,17 +1,5 @@
 #include "monsters.c"
 
-int attack()
-{
-	//I think this code is dead
-	
-	//derive attack dmg
-	time_t t;
-	srand((unsigned) time(&t));
-	int dmg = rand() % 5;
-	
-	return dmg;
-}
-
 //file to capture a battle scenario
 
 
