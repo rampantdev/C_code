@@ -174,25 +174,12 @@ sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d',
 	int go = 1;
 	while(go) {
 	
-	//adding functionality to create different adventure scenarios
-	//right now we only have battle, but lets include things like visit a town, and just walking depending on a dice roll
+	//triggers progression in the game; either continue walking, battle, or visit a city
+	nextEvent(currentCharacter, db);
 
-	time_t t;
-	srand((unsigned) time(&t));
-	int roll = rand() % 2;
-
-	if (roll == 0)
-		battle(currentCharacter, db);
-
-	if (roll == 1)
-		//visit a city
-		visitCity(db);
-	if (roll == 2)
-		//just walk and get some XP or something 
-		walk();
 	printf("Continue Adventure? \n 1 - Yes \t 0 - No\n");
 	scanf("%d", &go);
-	//need to verify either 1 or 0 was entered
+	//need to verify either 1 or 0 was entered and prevent bad input
 	}
 
 	return 0;

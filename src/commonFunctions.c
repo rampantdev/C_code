@@ -1,4 +1,20 @@
 
+int nextEvent(currentCharacter, db)
+{
+	time_t t;
+	srand((unsigned) time(&t));
+	int roll = rand() % 2;
+
+	if (roll == 0)
+		battle(currentCharacter, db);
+
+	if (roll == 1)
+		//visit a city
+		visitCity(db);
+	if (roll == 2)
+		//just walk and get some XP or something 
+		walk();
+}
 
 int walk() 
 {
