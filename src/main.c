@@ -9,6 +9,7 @@
 #include "battle.c"
 #include "cities.c"
 #include "setup.c"
+#include "sql_ops.c"
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 //used to insert newly created characters into the db
@@ -91,21 +92,8 @@ int main()
 	{ 
 	currentCharacter = newchar();	
 	
-	char * sql_insert[1000];
-	char sql_tmp[] = "INSERT INTO CHARACTERS (ID,NAME,RACE,CLASS,OWNER,WEAPON,HP,ATTACK,MAGIC,XP) \0";
-	char sql_tmp2[500];	 
-
-	
-sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d');", currentCharacter->name, currentCharacter->race,
-          currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
-          currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
-
-	strcpy(sql_insert, sql_tmp);
-	strcat(sql_insert, sql_tmp2);
-
-	//printf("TESTING : %s\n", sql_insert);
-
-    rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
+	char *sql_insert = buildNewCharString(currentCharacter);
+	rc = sqlite3_exec(db, sql_insert, callback, 0, &zErrMsg);
     
     if(rc != 0)
     	printf("Character creation has failed!\n");
