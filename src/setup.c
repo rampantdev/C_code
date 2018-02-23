@@ -4,7 +4,7 @@ int createCharTable(sqlite3 *db)
 //code is duplicated in main right now while we figure out how to make this work
 		sqlite3_stmt *statement;
 		char *zErrMsg = 0;
-		char sql_insert = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
+		char *sql_insert = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "RACE            CHAR(50)    NOT NULL," \
@@ -45,7 +45,7 @@ int createCities(sqlite3 *db)
 
 	//need to do one create table call, create a table for cities
 
-	char sql_insert = "CREATE TABLE IF NOT EXISTS CITIES ("  \
+	char *sql_insert = "CREATE TABLE IF NOT EXISTS CITIES ("  \
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "HOMERACE            CHAR(50)    NOT NULL," \
@@ -63,8 +63,8 @@ int createCities(sqlite3 *db)
     	 //cleans up memory
     sqlite3_finalize(statement);
 
-	printf("Did the table creation work? %d\n", rc);
-	
+
+    //code below is broken
 
 	fp = open("cities.txt", "r");
 	if(fp == NULL) {

@@ -80,7 +80,7 @@ int main()
 		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 		 printf("Did the table creation work? %d\n", rc);
 
-	//performs initializtion to ensure we have 
+	//performs initializtion to ensure we have created cities
 	rc = createCities(db);
 
 	//change this back to menu == 1, this was changed for debugging
