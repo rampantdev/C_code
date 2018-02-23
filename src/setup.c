@@ -63,9 +63,9 @@ int createCities(sqlite3 *db)
     	 //cleans up memory
     sqlite3_finalize(statement);
 
-
+    
     //code below is broken
-
+    
 	fp = open("cities.txt", "r");
 	if(fp == NULL) {
 		printf("ERROR ON FILE OPEN\n");

@@ -60,29 +60,13 @@ int main()
 	rc = sqlite3_open("dungeons.db", &db);
 	if( rc ) {
       fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-      return 0;
-   } else {
-     	fprintf(stdout, "Opened database successfully\n");
-   	
+      return 0;  
+   } 
 
-		char *sql = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
-         "ID INTEGER PRIMARY KEY     NOT NULL," \
-         "NAME           CHAR(50)    NOT NULL," \
-         "RACE            CHAR(50)    NOT NULL," \
-         "CLASS        CHAR(50)," \
-         "OWNER        CHAR(50)," \
-         "WEAPON        CHAR(50)," \
-         "HP        INT(50)," \
-         "ATTACK        INT(50)," \
-         "MAGIC        INT(50)," \
-		 "XP        INT(50));";
-
-		 rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
-		 printf("Did the table creation work? %d\n", rc);
 
 	//performs initializtion to ensure we have created cities
-	rc = createCities(db);
-
+	rc = createCharTable(db);
+	//rc = createCities(db);
 	//change this back to menu == 1, this was changed for debugging
 	if(menu == 1) { 
 		currentCharacter = newchar();	
@@ -92,7 +76,7 @@ int main()
     	if(rc != 0) {
     		printf("Character creation has failed!\n");
     		return 1;
-    		}
+    	}
 	
 		currentCharacter->id = getMaxID(db); //pull out the new ID that the sqlite db assigned automatically, so can later update our char
 
@@ -101,7 +85,7 @@ int main()
 
 		const char* data = "Callback function called";
 		//retrieve sqlite record 
-		sql = "SELECT ID, NAME, RACE, CLASS, OWNER FROM CHARACTERS";
+		char *sql = "SELECT ID, NAME, RACE, CLASS, OWNER FROM CHARACTERS";
 
         rc = sqlite3_exec(db, sql, callback_insert, (void*)data, &zErrMsg);
     	printf("%d\n", rc);
@@ -134,6 +118,5 @@ int main()
 
 	return 0;
 
-	}
-
 }
+
