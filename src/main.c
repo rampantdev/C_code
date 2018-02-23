@@ -81,7 +81,7 @@ int main()
 		 printf("Did the table creation work? %d\n", rc);
 
 	//performs initializtion to ensure we have 
-	//rc = createCities(db);
+	rc = createCities(db);
 
 	//change this back to menu == 1, this was changed for debugging
 	if(menu == 1) { 

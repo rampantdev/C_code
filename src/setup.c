@@ -28,6 +28,7 @@ int createCharTable(sqlite3 *db)
 
 int createCities(sqlite3 *db)
 {
+
 	//this function is called once ever, when a player first plays the game
 	//this function sets up ten different cities that a player can journey to and from
 	//assumption is made that cities exist in a linear line (ex: you must travel through city 5 6 7 in order to reach city 8)
@@ -53,9 +54,10 @@ int createCities(sqlite3 *db)
          "PROSPERITY  INT(3)," \
          "XP        INT(50));";
 
-		
+         //code is failing on the line below
 	int retStatus = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
     	 //executes the sql statement
+
     int rc = sqlite3_step(statement);
 
     	 //cleans up memory
