@@ -33,7 +33,6 @@ int createCities(sqlite3 *db)
 
 	char buf[100];
 	int x = 0;
-	FILE *fp;
 	char ch;
 	sqlite3_stmt *statement;
 
@@ -46,7 +45,7 @@ int createCities(sqlite3 *db)
          "KING        CHAR(50)," \
          "AFFINITY	  CHAR(50)," \
          "PROSPERITY  INT(3)," \
-         "XP        INT(50));";
+         "REGION        CHAR(50));";
 
          //code is failing on the line below
 	int rc = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
@@ -60,24 +59,55 @@ int createCities(sqlite3 *db)
 
     //code below is broken
 
-	fp = open("cities.txt", "r");
+	FILE *fp = fopen("cities.txt", "r");
 	if(fp == NULL) {
 		printf("ERROR ON FILE OPEN\n");
 		return 1;
 	}
-
+	
+	char * sql_insert[1000];
+	char sql_tmp2[500];	 
+	char sql_tmp[] = "INSERT INTO CITIES (ID,NAME,HOMERACE,KING,AFFINITY,PROSPERITY, REGION) \0";
+		
 	while((ch = fgetc(fp)) != EOF)
 	{
-		if(ch == "\n") {
-			x++;
-			buf[x + 1] = '\0';
+		printf("x: %d\t %c\n", x, ch);
+		
+		
+		if(ch == '\n' || ch == '\r') { //use '' for character and "" for a string
+ 			x++;
+			buf[x] = '\0';
 			//need to add a call to sqlite to write an entry into our cities table for our 10 cities
+
+		
+	
+		sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", currentCharacter->name, 
+			currentCharacter->race,
+        	currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
+         	currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
+
+		strcpy(sql_insert, sql_tmp);
+		strcat(sql_insert, sql_tmp2);
+
+	//printf("TESTING : %s\n", sql_insert);
+
+
+			printf("Our new city is: %s\n", buf);
+
+			x = 0;
 			continue;
 		}
 
+		
 		buf[x] = ch;
+		x++;
 	}
 
-
+    fclose(fp);
 	return 0;
 }
+
+
+
+
+

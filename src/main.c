@@ -66,7 +66,7 @@ int main()
 
 	//performs initializtion to ensure we have created cities
 	rc = createCharTable(db);
-	//rc = createCities(db);
+	rc = createCities(db);
 	//change this back to menu == 1, this was changed for debugging
 	if(menu == 1) { 
 		currentCharacter = newchar();	
