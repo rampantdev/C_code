@@ -2,10 +2,10 @@
 int createCharTable(sqlite3 *db)
 {
 //code is duplicated in main right now while we figure out how to make this work
-		sqlite3_stmt *statement;
-		char *zErrMsg = 0;
-		char *sql_insert = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
-         "ID INTEGER PRIMARY KEY     NOT NULL," \
+	sqlite3_stmt *statement;
+	char *zErrMsg = 0;
+	char *sql_insert = "CREATE TABLE IF NOT EXISTS CHARACTERS ("  \
+    	"ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "RACE            CHAR(50)    NOT NULL," \
          "CLASS        CHAR(50)," \
@@ -15,15 +15,9 @@ int createCharTable(sqlite3 *db)
          "ATTACK        INT(50)," \
          "MAGIC        INT(50)," \
 		 "XP        INT(50));";
-		int retStatus = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
-    	 //executes the sql statement
-    	int rc = sqlite3_step(statement);
-
-    	 //cleans up memory
-    	sqlite3_finalize(statement);
-
-		printf("Did the table creation work? %d\n", rc);
-
+	int rc = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
+    rc = sqlite3_step(statement);
+    sqlite3_finalize(statement);
 }
 
 int createCities(sqlite3 *db)
@@ -55,17 +49,17 @@ int createCities(sqlite3 *db)
          "XP        INT(50));";
 
          //code is failing on the line below
-	int retStatus = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
+	int rc = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
     	 //executes the sql statement
 
-    int rc = sqlite3_step(statement);
+    rc = sqlite3_step(statement);
 
     	 //cleans up memory
     sqlite3_finalize(statement);
 
-    
+
     //code below is broken
-    
+
 	fp = open("cities.txt", "r");
 	if(fp == NULL) {
 		printf("ERROR ON FILE OPEN\n");
