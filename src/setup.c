@@ -77,17 +77,21 @@ int createCities(sqlite3 *db)
 			buf[x] = '\0';
 			//need to add a call to sqlite to write an entry into our cities table for ourcities
 			char *homerace = getCityHomeRace();
+			printf("homerace: %s\n", homerace);
 			char *ruler = getCityRuler();
+			printf("ruler: %s\n", ruler);
 			char *affinity = getCityAffinity();
+			printf("affinity: %s\n", affinity);
 			char *prosperity = getCityProsperity();
+			printf("prosperity: %s\n", prosperity);
 			char *region = getCityRegion();
-
+			printf("region: %s\n", region);
 			
 	
-		sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", buf, homerace, ruler, affinity, prosperity, region); 
+			sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", buf, homerace, ruler, affinity, prosperity, region); 
 	
-		strcpy(sql_insert, sql_tmp);
-		strcat(sql_insert, sql_tmp2);
+			strcpy(sql_insert, sql_tmp);
+			strcat(sql_insert, sql_tmp2);
 
 			printf("Our new city is: %s\n", buf);
 
