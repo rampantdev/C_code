@@ -28,7 +28,6 @@ int createCities(sqlite3 *db)
 	//assumption is made that cities exist in a linear line (ex: you must travel through city 5 6 7 in order to reach city 8)
 
 	//a master list of 100 cities is located in cities.txt
-	//take 10 random cities from the list
 	//list taken from http://www.dungeoneering.net/d100-list-fantasy-town-names/
 
 	char buf[100];
@@ -42,7 +41,7 @@ int createCities(sqlite3 *db)
          "ID INTEGER PRIMARY KEY     NOT NULL," \
          "NAME           CHAR(50)    NOT NULL," \
          "HOMERACE            CHAR(50)    NOT NULL," \
-         "KING        CHAR(50)," \
+         "RULER        CHAR(50)," \
          "AFFINITY	  CHAR(50)," \
          "PROSPERITY  INT(3)," \
          "REGION        CHAR(50));";
@@ -65,9 +64,8 @@ int createCities(sqlite3 *db)
 		return 1;
 	}
 	
-	char * sql_insert[1000];
 	char sql_tmp2[500];	 
-	char sql_tmp[] = "INSERT INTO CITIES (ID,NAME,HOMERACE,KING,AFFINITY,PROSPERITY, REGION) \0";
+	char sql_tmp[] = "INSERT INTO CITIES (ID,NAME,HOMERACE,RULER,AFFINITY,PROSPERITY, REGION) \0";
 		
 	while((ch = fgetc(fp)) != EOF)
 	{
@@ -77,20 +75,19 @@ int createCities(sqlite3 *db)
 		if(ch == '\n' || ch == '\r') { //use '' for character and "" for a string
  			x++;
 			buf[x] = '\0';
-			//need to add a call to sqlite to write an entry into our cities table for our 10 cities
+			//need to add a call to sqlite to write an entry into our cities table for ourcities
+			char *homerace = getCityHomeRace();
+			char *ruler = getCityRuler();
+			char *affinity = getCityAffinity();
+			char *prosperity = getCityProsperity();
+			char *region = getCityRegion();
 
-		
+			
 	
-		sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", currentCharacter->name, 
-			currentCharacter->race,
-        	currentCharacter->class, currentCharacter->owner, currentCharacter->weapon, currentCharacter->hp,
-         	currentCharacter->attack, currentCharacter->magic, currentCharacter->xp);
-
+		sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", buf, homerace, ruler, affinity, prosperity, region); 
+	
 		strcpy(sql_insert, sql_tmp);
 		strcat(sql_insert, sql_tmp2);
-
-	//printf("TESTING : %s\n", sql_insert);
-
 
 			printf("Our new city is: %s\n", buf);
 

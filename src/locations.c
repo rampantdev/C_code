@@ -1,3 +1,5 @@
+
+//location() grabs a rndom suffix to assign to our monsters in order to make them unique
 int location()
 {
 
@@ -37,3 +39,68 @@ int location()
 	}
 
 }
+
+
+char *getCityHomeRace()
+{
+	char *homerace;
+	
+
+	time_t t;
+	srand((unsigned) time(&t));
+	int roll = rand() % 8;
+	
+	switch(roll) {
+	
+	case 0:
+		strncpy(homerace, "Dwarf\0", 6);
+		break;
+
+	case 1:
+		strncpy(homerace, "Orc\0", 6);
+		break;
+
+	case 2:
+		strncpy(homerace, "Elf\0", 6);
+		break;
+
+	case 3:
+		strncpy(homerace, "Human\0", 6);
+		break;
+
+	case 4:
+		strncpy(homerace, "Gnome\0", 6);
+		break;
+	}
+	
+	return homerace;
+}
+
+char *getCityRuler()
+{
+	char *ruler;
+
+	return ruler;
+}
+
+char *getCityAffinity()
+{
+	char *affinity;
+
+	return affinity;
+}
+
+char *getCityProsperity()
+{
+	char *prosperity;
+
+	return prosperity;
+}
+
+char *getCityRegion()
+{
+	char *region;
+
+	return region;
+}
+
