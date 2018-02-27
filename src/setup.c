@@ -18,6 +18,8 @@ int createCharTable(sqlite3 *db)
 	int rc = sqlite3_prepare_v2(db, sql_insert, -1, &statement, NULL);
     rc = sqlite3_step(statement);
     sqlite3_finalize(statement);
+
+    return 0;
 }
 
 int createCities(sqlite3 *db)
@@ -30,7 +32,7 @@ int createCities(sqlite3 *db)
 	//a master list of 100 cities is located in cities.txt
 	//list taken from http://www.dungeoneering.net/d100-list-fantasy-town-names/
 
-	char buf[100];
+	char buf[1000];
 	int x = 0;
 	char ch;
 	sqlite3_stmt *statement;
@@ -58,7 +60,7 @@ int createCities(sqlite3 *db)
 
     //code below is broken
 
-	FILE *fp = fopen("cities.txt", "r");
+	FILE *fp = fopen("test.txt", "r");
 	if(fp == NULL) {
 		printf("ERROR ON FILE OPEN\n");
 		return 1;
@@ -66,7 +68,8 @@ int createCities(sqlite3 *db)
 	
 	char sql_tmp2[500];	 
 	char sql_tmp[] = "INSERT INTO CITIES (ID,NAME,HOMERACE,RULER,AFFINITY,PROSPERITY, REGION) \0";
-		
+	char sql_insert2[500];
+	
 	while((ch = fgetc(fp)) != EOF)
 	{
 		printf("x: %d\t %c\n", x, ch);
@@ -76,27 +79,39 @@ int createCities(sqlite3 *db)
  			x++;
 			buf[x] = '\0';
 			//need to add a call to sqlite to write an entry into our cities table for ourcities
+			
+
 			char *homerace = getCityHomeRace();
 			printf("homerace: %s\n", homerace);
+
 			char *ruler = getCityRuler();
 			printf("ruler: %s\n", ruler);
+			
 			char *affinity = getCityAffinity();
 			printf("affinity: %s\n", affinity);
+
 			char *prosperity = getCityProsperity();
 			printf("prosperity: %s\n", prosperity);
-			char *region = getCityRegion();
-			printf("region: %s\n", region);
-			
-	
-			sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", buf, homerace, ruler, affinity, prosperity, region); 
-	
-			strcpy(sql_insert, sql_tmp);
-			strcat(sql_insert, sql_tmp2);
 
-			printf("Our new city is: %s\n", buf);
+			char *region = getCityRegion();
+  			printf("region: %s\n", region);
+
+			printf("prosperity again: %s\n", prosperity);
+			
+			/*
+			sprintf(sql_tmp2, "VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s');", buf, homerace, ruler, affinity, prosperity, region); 
+			strcpy(sql_insert2, sql_tmp);
+			printf("hi\n");
+			
+			strcat(sql_insert2, sql_tmp2);
+
+			printf("%s\n", sql_insert2);
+			*/
 
 			x = 0;
-			continue;
+			//*buf = "\0";
+			memset(buf, 0, sizeof(buf));
+
 		}
 
 		

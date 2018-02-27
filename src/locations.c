@@ -43,13 +43,14 @@ int location()
 
 char *getCityHomeRace()
 {
-	char *homerace;
-	
+	printf("this far\n");
+	char *homerace = malloc(sizeof(char) *6);
 
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 4;
+	int roll = rand() % 5;
 	
+	printf("rand: %d\n", roll);
 	switch(roll) {
 	
 	case 0:
@@ -57,11 +58,11 @@ char *getCityHomeRace()
 		break;
 
 	case 1:
-		strncpy(homerace, "Orc\0", 6);
+		strncpy(homerace, "Orc\0", 4);
 		break;
 
 	case 2:
-		strncpy(homerace, "Elf\0", 6);
+		strncpy(homerace, "Elf\0", 4);
 		break;
 
 	case 3:
@@ -73,16 +74,16 @@ char *getCityHomeRace()
 		break;
 	
 	default:
-		printf("Homrace selection has failed!\n");
-		break;
+		printf("Homerace selection has failed!\n");
 	}
+	printf("IN FUNC HOME RACE: %s\n", homerace);
 	return homerace;
 }
 
 char *getCityRuler()
 {
-	
-	char *ruler;
+
+	char *ruler = malloc(sizeof(char) * 9);
 
 	time_t t;
 	srand((unsigned) time(&t));
@@ -121,17 +122,16 @@ char *getCityRuler()
 	
 	default:
 		printf("Ruler Selection Has Failed\n");
-		break;
 	}
 	return ruler;
 }
 
 char *getCityAffinity()
 {
-	char *affinity;
+	char *affinity = malloc(sizeof(char) * 9);
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 4;
+	int roll = rand() % 5;
 	
 	
 	switch(roll) {
@@ -153,12 +153,11 @@ char *getCityAffinity()
 		break;
 
 	case 4:
-		strncpy(affinity, "Merchant\0", 8);
+		strncpy(affinity, "Merchant\0", 9);
 		break;
 	
 	default:
 		printf("Affinity Selection Has Failed\n");
-		break;
 	}
 
 	return affinity;
@@ -166,10 +165,10 @@ char *getCityAffinity()
 
 char *getCityProsperity()
 {
-	char *prosperity;
+	char *prosperity = malloc(sizeof(char) * 13);
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 3;
+	int roll = rand() % 4;
 	
 	
 	switch(roll) {
@@ -187,12 +186,11 @@ char *getCityProsperity()
 		break;
 
 	case 3:
-		strncpy(prosperity, "Impoverished\0", 7);
+		strncpy(prosperity, "Impoverished\0", 13);
 		break;
 
 	default:
 		printf("Prosperity Selection Has Failed\n");
-		break;
 	}
 
 	return prosperity;
@@ -200,10 +198,11 @@ char *getCityProsperity()
 
 char *getCityRegion()
 {
-	char *region;
+	char *region = malloc(sizeof(char) * 6);
+
 	time_t t;
 	srand((unsigned) time(&t));
-	int roll = rand() % 3;
+	int roll = rand() % 4;
 	
 	
 	switch(roll) {
@@ -226,7 +225,6 @@ char *getCityRegion()
 
 	default:
 		printf("Region Selection Has Failed\n");
-		break;
 	}
 
 	return region;
